@@ -9,15 +9,18 @@ API test automation project for Reqres API using Java, REST Assured, JUnit 5 and
 
 ## Technology Stack
 
-- Java
-- Gradle
-- REST Assured
-- JUnit 5
-- Jackson
-- Lombok
-- Allure Report
-- Allure REST Assured
-- Git
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=java,gradle,git,github,idea" />
+</p>
+
+<p align="center">
+  <b>REST Assured</b> •
+  <b>JUnit 5</b> •
+  <b>Allure Report</b> •
+  <b>Lombok</b> •
+  <b>Jackson</b> •
+  <b>FreeMarker</b>
+</p>
 
 ## Test Coverage
 
