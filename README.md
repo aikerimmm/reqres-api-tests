@@ -118,11 +118,11 @@ Tests also contain Allure metadata such as:
 
 ### Allure Report Overview
 
-![Allure Report Overview](allure-overview.png)
+![Allure Report Overview](images/allure-overview.png)
 
 ### Test Details
 
-![Allure Test Details](allure-test-details.png)
+![Allure Test Details](images/allure-test-details.png)
 
 ## Running Tests
 
