@@ -1,9 +1,12 @@
-# Reqres API Test Automation
+# API Test Automation Project — Reqres
 
-Automated API testing project for the Reqres REST API.
+<p align="center">
+  <img src="images/reqres.png" alt="Reqres API Test Automation" width="100%">
+</p>
 
-The project demonstrates API test automation using Java, REST Assured, JUnit 5, DTO models, request/response specifications, and Allure reporting.
+API test automation project for Reqres API using Java, REST Assured, JUnit 5 and Allure Report.
 
+## Technology Stack
 ## Technology Stack
 
 - Java
