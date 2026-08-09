@@ -103,27 +103,13 @@ Allure REST Assured integration automatically attaches HTTP request and response
 
 Custom Freemarker templates are used for REST Assured attachments:
 
-```text
-src/test/resources/tpl/request.ftl
-src/test/resources/tpl/response.ftl
-```
+```text### Allure Report Overview
 
-Tests also contain Allure metadata such as:
-
-- Epic
-- Feature
-- Story
-- Severity
-- Owner
-
-### Allure Report Overview
-
-![Allure Report Overview](images/![img.png](img.png))
+![Allure Report Overview](img.png)
 
 ### Test Details
 
-![Allure Test Details](images/![img_1.png](img_1.png))
-
+![Allure Test Details](img_1.png)
 ## Running Tests
 
 Run all tests:
