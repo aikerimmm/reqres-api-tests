@@ -1,7 +1,7 @@
 # API Test Automation Project — Reqres
 
 <p align="center">
-  <img src="images/reqres-banner.png" alt="Reqres API Test Automation" width="100%">
+  <img src="images/reqres.png" alt="Reqres API Test Automation" width="100%">
 </p>
 
 API test automation project for Reqres API using Java, REST Assured, JUnit 5 and Allure Report.
