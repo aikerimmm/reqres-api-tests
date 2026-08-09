@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '4.1.0'
+}
+
+group = 'qa.guru'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+
+    // REST Assured
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+
+    // Jackson
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+
+    // Allure + REST Assured
+    testImplementation 'io.qameta.allure:allure-rest-assured:2.29.1'
+
+    // Allure + JUnit 5
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.1'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+    testCompileOnly 'org.projectlombok:lombok:1.18.32'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+allure {
+    version = '2.32.0'
+}
