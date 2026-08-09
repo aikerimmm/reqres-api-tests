@@ -116,6 +116,14 @@ Tests also contain Allure metadata such as:
 - Severity
 - Owner
 
+### Allure Report Overview
+
+![Allure Report Overview](images/![img.png](img.png))
+
+### Test Details
+
+![Allure Test Details](images/![img_1.png](img_1.png))
+
 ## Running Tests
 
 Run all tests:
