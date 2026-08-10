@@ -6,6 +6,51 @@
 
 API test automation project for Reqres API using Java, REST Assured, JUnit 5 and Allure Report.
 
+## Description
+
+This project is designed for automated testing of the Reqres REST API. It covers the main user-related API operations, including creating, retrieving, updating, and deleting users, as well as negative scenarios.
+
+### Project Features
+
+- API test automation using `Java`
+- `REST Assured` for sending HTTP requests and validating responses
+- `JUnit 5` as the test framework
+- `Gradle` for project build and dependency management
+- DTO models for request body serialization and response deserialization
+- `Lombok` for reducing boilerplate code in API models
+- `Jackson` for JSON serialization and deserialization
+- Reusable `RequestSpecification` and `ResponseSpecification`
+- API key configuration through environment variables without storing secrets in the repository
+- Positive and negative API test scenarios
+- Coverage of the main user operations:
+    - `POST` — create a new user
+    - `GET` — get users list
+    - `GET` — get a single user
+    - `PUT` — update a user
+    - `DELETE` — delete a user
+    - `GET` — verify response for a non-existing user
+- Integration of `REST Assured` with `Allure Report`
+- Custom `FreeMarker` templates for Allure attachments:
+    - `request.ftl` — HTTP request details
+    - `response.ftl` — HTTP response details
+- Allure metadata for better test organization:
+    - Epic
+    - Feature
+    - Story
+    - Severity
+    - Owner
+- HTTP request and response details are automatically attached to the Allure Report
+- All tests can be executed locally with:
+
+```bash
+./gradlew clean test
+```
+
+- Allure Report can be generated and opened locally with:
+
+```bash
+./gradlew allureServe
+```
 
 ## Technology Stack
 
