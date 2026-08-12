@@ -30,6 +30,13 @@ This project is designed for automated testing of the Reqres REST API. It covers
     - `DELETE` — delete a user
     - `GET` — verify response for a non-existing user
 - Integration of `REST Assured` with `Allure Report`
+- - CI test execution using `Jenkins`
+- Pipeline configuration using `Jenkinsfile`
+- Secure secret management using `Jenkins Credentials`
+- Automatic `Allure Report` generation after Jenkins builds
+- Automatic Telegram notifications after test execution
+- Dynamic test statistics calculation from JUnit XML results
+- Automatic test result chart generation for Telegram reports
 - Custom `FreeMarker` templates for Allure attachments:
     - `request.ftl` — HTTP request details
     - `response.ftl` — HTTP response details
@@ -51,7 +58,73 @@ This project is designed for automated testing of the Reqres REST API. It covers
 ```bash
 ./gradlew allureServe
 ```
+## CI/CD with Jenkins
 
+The project is integrated with Jenkins CI for automated test execution.
+
+The Jenkins pipeline performs the following steps:
+
+- Checks out the project from GitHub
+- Loads sensitive data from Jenkins Credentials
+- Executes the API test suite using Gradle
+- Collects test execution statistics
+- Generates an Allure Report
+- Generates a test results chart
+- Sends test execution results to Telegram
+
+The following secrets are stored securely in Jenkins Credentials and are not committed to the repository:
+
+- `REQRES_API_KEY`
+- `TELEGRAM_BOT_TOKEN`
+- `TELEGRAM_CHAT_ID`
+
+The pipeline configuration is stored in:
+
+```text
+Jenkinsfile
+```
+
+### Jenkins Pipeline Flow
+
+```text
+GitHub
+   ↓
+Jenkins
+   ↓
+Gradle
+   ↓
+API Tests
+   ↓
+Allure Report
+   ↓
+Telegram Notification
+```
+
+### Jenkins Build
+
+![Jenkins Build](images/jenkins-allure.png)
+
+---
+
+## Telegram Notifications
+
+After each Jenkins build, the test execution results are automatically sent to Telegram.
+
+The notification contains:
+
+- Environment
+- Build number
+- Total number of scenarios
+- Passed tests
+- Failed tests
+- Skipped tests
+- Pass percentage
+- Test result chart
+- Link to the Allure Report
+
+Example:
+
+![Telegram Test Report](images/telegram-report.png)
 ## Technology Stack
 
 <p align="center">
@@ -65,6 +138,24 @@ This project is designed for automated testing of the Reqres REST API. It covers
   <b>Lombok</b> •
   <b>Jackson</b> •
   <b>FreeMarker</b>
+</p>
+## Technology Stack
+
+<p align="center">
+  <img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" title="Java"/>
+  &nbsp;&nbsp;
+  <img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-original.svg" title="Gradle"/>
+  &nbsp;&nbsp;
+  <img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" title="Jenkins"/>
+  &nbsp;&nbsp;
+  <img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" title="GitHub"/>
+</p>
+
+<p align="center">
+  <b>Java</b>&nbsp;&nbsp;&nbsp;
+  <b>Gradle</b>&nbsp;&nbsp;&nbsp;
+  <b>Jenkins</b>&nbsp;&nbsp;&nbsp;
+  <b>GitHub</b>
 </p>
 
 ## Test Coverage
