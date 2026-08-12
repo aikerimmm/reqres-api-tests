@@ -1,86 +1,132 @@
-# Reqres API Test Automation
+# API Test Automation Project [Reqres.in](https://reqres.in)
 
 <p align="center">
-  <img src="images/reqres.png" alt="Reqres API Test Automation" width="100%">
-</p>
-
-<p align="center">
-  API test automation project built with Java, REST Assured, JUnit 5, Gradle, Allure Report, Jenkins and Telegram notifications.
+  <img src="images/reqres.png" alt="Reqres" width="100%">
 </p>
 
 ---
 
-## Technology Stack
+## Contents
+
+* [Description](#description)
+* [Technologies and Tools](#technologies-and-tools)
+* [Implemented Tests](#implemented-tests)
+* [Project Structure](#project-structure)
+* [Running Tests](#running-tests)
+* [Jenkins CI](#jenkins-ci)
+* [Allure Report](#allure-report)
+
+    * [Allure Overview](#allure-overview)
+    * [Test Details](#test-details)
+* [Telegram Notifications](#telegram-notifications)
+* [API Key](#api-key)
+
+---
+
+## Description
+
+Reqres API Test Automation is a project for automated testing of the REST API provided by [reqres.in](https://reqres.in).
+
+The project covers the main user-related API operations: creating, retrieving, updating and deleting users, as well as negative scenarios.
+
+### Project Features
+
+* API tests written in `Java`
+* HTTP requests and response validation using `REST Assured`
+* Test execution with `JUnit 5`
+* Project build and dependency management with `Gradle`
+* Request and response models using `Lombok`
+* JSON serialization and deserialization using `Jackson`
+* Reusable `RequestSpecification` and `ResponseSpecification`
+* Positive and negative API scenarios
+* `Allure REST Assured` listener
+* Custom `FreeMarker` templates for HTTP request and response attachments
+* Allure metadata:
+
+    * Epic
+    * Feature
+    * Story
+    * Severity
+    * Owner
+* Automated execution through `Jenkins`
+* Secrets stored in `Jenkins Credentials`
+* Automatic Allure Report generation
+* Automatic Telegram notifications after Jenkins builds
+* Test statistics and result chart sent to Telegram
+
+---
+
+## Technologies and Tools
 
 <p align="center">
-  <img width="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" title="Java"/>
+  <img width="55" title="Java" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"/>
   &nbsp;&nbsp;
-  <img width="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-original.svg" title="Gradle"/>
+  <img width="55" title="Gradle" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-original.svg"/>
   &nbsp;&nbsp;
-  <img width="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" title="Jenkins"/>
+  <img width="55" title="Jenkins" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"/>
   &nbsp;&nbsp;
-  <img width="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" title="GitHub"/>
+  <img width="55" title="Git" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"/>
   &nbsp;&nbsp;
-  <img width="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg" title="IntelliJ IDEA"/>
+  <img width="55" title="GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/>
+  &nbsp;&nbsp;
+  <img width="55" title="IntelliJ IDEA" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg"/>
 </p>
 
 <p align="center">
   <b>REST Assured</b> •
   <b>JUnit 5</b> •
-  <b>Jackson</b> •
-  <b>Lombok</b> •
   <b>Allure Report</b> •
+  <b>Lombok</b> •
+  <b>Jackson</b> •
   <b>FreeMarker</b> •
   <b>Telegram Bot API</b>
 </p>
 
 ---
 
-## Description
+## Implemented Tests
 
-This project is designed for automated testing of the Reqres REST API.
+The project contains automated tests for the main Reqres user API operations.
 
-It covers the main user-related API operations, including creating, retrieving, updating and deleting users, as well as negative scenarios.
+* `POST /users`
 
-The project demonstrates API test automation architecture using reusable specifications, DTO models, Allure reporting, CI execution through Jenkins and automated Telegram notifications.
+    * Create a new user
+    * Validate `201 Created`
+    * Deserialize response into DTO
 
-### Project Features
+* `GET /users`
 
-* API test automation using `Java`
-* `REST Assured` for HTTP requests and response validation
-* `JUnit 5` as the test framework
-* `Gradle` for project build and dependency management
-* DTO models for request serialization and response deserialization
-* `Lombok` for reducing boilerplate code
-* `Jackson` for JSON serialization and deserialization
-* Reusable `RequestSpecification` and `ResponseSpecification`
-* Positive and negative API scenarios
-* API key configuration through environment variables
-* Sensitive data stored securely in Jenkins Credentials
-* Integration with `Allure Report`
-* `Allure REST Assured` listener with custom FreeMarker templates
-* Automated test execution using `Jenkins`
-* Pipeline configuration stored in `Jenkinsfile`
-* Automatic Telegram notifications after Jenkins builds
-* Dynamic test result statistics
-* Automatic test result chart generation for Telegram reports
+    * Get users list
+    * Validate response status
+    * Deserialize users collection
 
----
+* `GET /users/2`
 
-## Test Coverage
+    * Get a single user
+    * Validate user information
 
-The project contains automated tests for the main user management API operations.
+* `GET /users/99999`
 
-| Test Scenario         | HTTP Method | Endpoint       | Expected Status |
-| --------------------- | ----------- | -------------- | --------------: |
-| Create a new user     | POST        | `/users`       |             201 |
-| Get users list        | GET         | `/users`       |             200 |
-| Get single user       | GET         | `/users/2`     |             200 |
-| Get non-existing user | GET         | `/users/99999` |             404 |
-| Update user           | PUT         | `/users/2`     |             200 |
-| Delete user           | DELETE      | `/users/2`     |             204 |
+    * Request a non-existing user
+    * Validate `404 Not Found`
 
-The suite contains both positive and negative API scenarios.
+* `PUT /users/2`
+
+    * Update user information
+    * Validate updated response
+
+* `DELETE /users/2`
+
+    * Delete user
+    * Validate `204 No Content`
+
+### Current Test Suite
+
+```text
+Total tests: 6
+Passed: 6
+Failed: 0
+```
 
 ---
 
@@ -88,11 +134,6 @@ The suite contains both positive and negative API scenarios.
 
 ```text
 reqres-api-tests
-├── gradle
-│   └── wrapper
-│       ├── gradle-wrapper.jar
-│       └── gradle-wrapper.properties
-│
 ├── images
 │   ├── reqres.png
 │   ├── allure-overview.png
@@ -127,160 +168,39 @@ reqres-api-tests
 │           │
 │           └── allure.properties
 │
-├── .gitignore
+├── Jenkinsfile
 ├── build.gradle
 ├── gradlew
 ├── gradlew.bat
-├── Jenkinsfile
-├── README.md
-└── settings.gradle
+├── settings.gradle
+└── README.md
 ```
 
 ---
 
-## API Models
+## Running Tests
 
-DTO models are used for request body serialization and response deserialization.
+### Local Test Execution
 
-### Request Models
-
-Examples:
-
-```text
-CreateUserRequestDto
-UpdateUserRequestDto
-```
-
-These models are used for generating request bodies for `POST` and `PUT` requests.
-
-Example:
-
-```java
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class CreateUserRequestDto {
-
-    private String name;
-    private String job;
-}
-```
-
-### Response Models
-
-Response DTOs are used to deserialize JSON responses into Java objects.
-
-Examples:
-
-```text
-CreateUserResponseDto
-UpdateUserResponseDto
-UserDto
-UserSearchResponseDto
-```
-
-`Jackson` handles JSON mapping, while `Lombok` reduces boilerplate code in DTO classes.
-
----
-
-## REST Assured Specifications
-
-Common REST Assured configuration is extracted into reusable specifications.
-
-The specification contains:
-
-* Base URI
-* Base path
-* Content type
-* API key header
-* Request logging
-* Response logging
-* Allure REST Assured filter
-* Custom request template
-* Custom response template
-
-Example usage:
-
-```java
-given()
-        .spec(requestSpec)
-.when()
-        .get("/users/2")
-.then()
-        .spec(responseSpec)
-        .statusCode(200);
-```
-
-This approach keeps tests readable and prevents configuration duplication.
-
----
-
-## API Key
-
-Reqres requires an API key for requests.
-
-The real API key must **not** be committed to the repository.
-
-Set the key as an environment variable before running tests locally:
+Before running the tests, configure the Reqres API key:
 
 ```bash
 export REQRES_API_KEY=YOUR_API_KEY
 ```
 
-Then run:
+Run all tests:
 
 ```bash
 ./gradlew clean test
 ```
 
-The test framework reads the key using:
-
-```java
-System.getenv("REQRES_API_KEY")
-```
-
-In Jenkins, the real API key is stored securely in Jenkins Credentials.
-
----
-
-## Allure Report
-
-The project is integrated with Allure Report.
-
-The Allure REST Assured integration automatically attaches HTTP request and response information to test results.
-
-Custom FreeMarker templates are used for REST Assured attachments:
-
-```text
-src/test/resources/tpl/request.ftl
-src/test/resources/tpl/response.ftl
-```
-
-Tests also contain Allure metadata such as:
-
-* Epic
-* Feature
-* Story
-* Severity
-* Owner
-
-### Allure Report Overview
-
-![Allure Report Overview](images/allure-overview.png)
-
-### Test Details
-
-![Allure Test Details](images/allure-test-details.png)
-
-### Run Allure Locally
-
-Run tests:
+### Generate Allure Report
 
 ```bash
-./gradlew clean test
+./gradlew allureReport
 ```
 
-Open Allure Report:
+### Open Allure Report
 
 ```bash
 ./gradlew allureServe
@@ -288,11 +208,17 @@ Open Allure Report:
 
 ---
 
-## CI/CD with Jenkins
+## Jenkins CI
 
-The project is integrated with Jenkins for automated test execution.
+The project is integrated with Jenkins.
 
-The Jenkins pipeline performs the following flow:
+The pipeline is described in:
+
+```text
+Jenkinsfile
+```
+
+### Jenkins Pipeline Flow
 
 ```text
 GitHub
@@ -312,15 +238,19 @@ Allure Report
 Telegram Notification
 ```
 
-The pipeline configuration is stored in:
+The pipeline automatically:
 
-```text
-Jenkinsfile
-```
+* Downloads the project from GitHub
+* Loads secrets from Jenkins Credentials
+* Executes API tests
+* Collects JUnit XML test statistics
+* Generates an Allure Report
+* Generates a test result chart
+* Sends execution results to Telegram
 
 ### Jenkins Credentials
 
-Sensitive values are stored in Jenkins Credentials and are not committed to GitHub:
+The following secrets are stored in Jenkins and are not committed to GitHub:
 
 ```text
 REQRES_API_KEY
@@ -328,46 +258,77 @@ TELEGRAM_BOT_TOKEN
 TELEGRAM_CHAT_ID
 ```
 
-### Jenkins Pipeline Responsibilities
-
-The pipeline:
-
-* Checks out the project from GitHub
-* Loads secrets from Jenkins Credentials
-* Runs the API test suite
-* Generates JUnit XML results
-* Calculates test statistics
-* Publishes an Allure Report
-* Generates a test result chart
-* Sends build results to Telegram
-
 ### Jenkins Build
 
-![Jenkins Build](images/jenkins-allure.png)
+<p align="center">
+  <img src="images/jenkins-allure.png" alt="Jenkins Build" width="90%">
+</p>
+
+---
+
+## Allure Report
+
+The project is integrated with Allure Report.
+
+Allure REST Assured automatically attaches HTTP request and response details to test results.
+
+Custom FreeMarker templates are used:
+
+```text
+src/test/resources/tpl/request.ftl
+src/test/resources/tpl/response.ftl
+```
+
+The report contains:
+
+* Test status
+* Test duration
+* Epic
+* Feature
+* Story
+* Severity
+* Owner
+* HTTP request
+* HTTP response
+* Response status code
+
+### Allure Overview
+
+<p align="center">
+  <img src="images/allure-overview.png" alt="Allure Overview" width="90%">
+</p>
+
+### Test Details
+
+<p align="center">
+  <img src="images/allure-test-details.png" alt="Allure Test Details" width="90%">
+</p>
 
 ---
 
 ## Telegram Notifications
 
-After each Jenkins build, test execution results are automatically sent to Telegram.
+After Jenkins finishes the build, the execution results are automatically sent to Telegram.
 
 The notification contains:
 
 * Environment
 * Jenkins build number
-* Total number of test scenarios
+* Total number of scenarios
 * Passed tests
 * Failed tests
 * Skipped tests
 * Pass percentage
 * Test result chart
-* Link to the Jenkins Allure Report
+* Link to the Allure Report
 
 ### Telegram Report
 
-![Telegram Test Report](images/telegram-report.png)
+<p align="center">
+  <img src="images/telegram-report.png" alt="Telegram Test Report" width="75%">
+</p>
 
-Example result:
+Example:
 
 ```text
 Reqres API Tests
@@ -384,75 +345,19 @@ Total skipped: 0
 
 ---
 
-## Running Tests
+## API Key
 
-### Run all tests
+Reqres requires an API key for API requests.
 
-```bash
-./gradlew clean test
-```
+The real API key is not stored in the repository.
 
-### Run tests with an API key
-
-macOS / Linux:
+For local execution:
 
 ```bash
 export REQRES_API_KEY=YOUR_API_KEY
-./gradlew clean test
 ```
 
-### Generate Allure Report
-
-```bash
-./gradlew allureReport
-```
-
-### Open Allure Report
-
-```bash
-./gradlew allureServe
-```
-
----
-
-## Security
-
-Secrets must never be stored directly in source code.
-
-The project uses:
-
-```text
-Environment Variables
-        ↓
-Local Test Execution
-
-Jenkins Credentials
-        ↓
-CI Test Execution
-```
-
-The following values must never be committed:
-
-```text
-Real Reqres API keys
-Telegram Bot tokens
-Telegram Chat IDs
-GitHub Personal Access Tokens
-```
-
----
-
-## Test Execution Result
-
-Current automated API suite:
-
-```text
-Total tests: 6
-Passed: 6
-Failed: 0
-```
-
-The complete execution details are available through Allure Report and Jenkins.
+For Jenkins execution, the API key is stored securely in Jenkins Credentials.
 
 ---
 
