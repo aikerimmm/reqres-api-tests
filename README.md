@@ -286,7 +286,7 @@ Configure your API key according to the project configuration before running the
 Example:
 
 ```bash
-export REQRES_API_KEY=free_user_3HgoK6zjcXsPkjzRyV2g2eD17p9
+export REQRES_API_KEY=YOUR_API_KEY
 ./gradlew clean test
 ```
 
