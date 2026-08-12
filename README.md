@@ -139,7 +139,6 @@ Example:
   <b>Jackson</b> •
   <b>FreeMarker</b>
 </p>
-## Technology Stack
 
 <p align="center">
   <img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" title="Java"/>
