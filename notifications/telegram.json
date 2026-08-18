@@ -5,7 +5,7 @@
     "comment": "Reqres API tests",
     "reportLink": "",
     "language": "en",
-    "allureFolder": "build/reports/allure-report/allureReport/",
+    "allureFolder": "allure-report",
     "enableChart": true
   },
   "telegram": {
