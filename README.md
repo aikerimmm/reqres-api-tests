@@ -1,7 +1,7 @@
 # API Test Automation Project — Reqres.in
 
 <p align="center">
-  <img src="images/reqres-logo.png" alt="Reqres" width="250">
+  <img src="images/reqres.png" alt="Reqres" width="250">
 </p>
 
 <p align="center">
