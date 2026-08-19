@@ -1,7 +1,25 @@
-# API Test Automation Project [Reqres.in](https://reqres.in)
+# API Test Automation Project — Reqres.in
 
 <p align="center">
-  <img src="images/reqres.png" alt="Reqres" width="250">
+  <img src="images/reqres-logo.png" alt="Reqres" width="250">
+</p>
+
+<p align="center">
+  API test automation project for testing the Reqres REST API
+</p>
+
+<p align="center">
+  <a href="https://jenkins.qa.guru/job/reqres-api-tests/">
+    <b>Jenkins</b>
+  </a>
+  •
+  <a href="https://jenkins.qa.guru/job/reqres-api-tests/allure/">
+    <b>Allure Report</b>
+  </a>
+  •
+  <a href="https://allure.qa.guru/launch/55690">
+    <b>Allure TestOps</b>
+  </a>
 </p>
 
 ---
@@ -15,17 +33,18 @@
 * [Running Tests](#running-tests)
 * [Jenkins CI](#jenkins-ci)
 * [Allure Report](#allure-report)
-
-    * [Allure Overview](#allure-overview)
-    * [Test Details](#test-details)
+  * [Allure Overview](#allure-overview)
+  * [Test Details](#test-details)
+* [Allure TestOps](#allure-testops)
 * [Telegram Notifications](#telegram-notifications)
 * [API Key](#api-key)
+* [Author](#author)
 
 ---
 
 ## Description
 
-Reqres API Test Automation is a project for automated testing of the REST API provided by [reqres.in](https://reqres.in).
+Reqres API Test Automation is a project for automated testing of the REST API provided by [Reqres.in](https://reqres.in).
 
 The project covers the main user-related API operations: creating, retrieving, updating and deleting users, as well as negative scenarios.
 
@@ -42,15 +61,15 @@ The project covers the main user-related API operations: creating, retrieving, u
 * `Allure REST Assured` listener
 * Custom `FreeMarker` templates for HTTP request and response attachments
 * Allure metadata:
-
-    * Epic
-    * Feature
-    * Story
-    * Severity
-    * Owner
+  * Epic
+  * Feature
+  * Story
+  * Severity
+  * Owner
 * Automated execution through `Jenkins`
 * Secrets stored in `Jenkins Credentials`
 * Automatic Allure Report generation
+* Integration with `Allure TestOps`
 * Automatic Telegram notifications after Jenkins builds
 * Test statistics and result chart sent to Telegram
 
@@ -59,23 +78,41 @@ The project covers the main user-related API operations: creating, retrieving, u
 ## Technologies and Tools
 
 <p align="center">
-  <img width="55" title="Java" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"/>
+  <a href="https://www.java.com/">
+    <img width="55" title="Java" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"/>
+  </a>
   &nbsp;&nbsp;
-  <img width="55" title="Gradle" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-original.svg"/>
+
+  <a href="https://gradle.org/">
+    <img width="55" title="Gradle" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gradle/gradle-original.svg"/>
+  </a>
   &nbsp;&nbsp;
-  <img width="55" title="Jenkins" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"/>
+
+  <a href="https://jenkins.qa.guru/job/reqres-api-tests/">
+    <img width="55" title="Jenkins" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"/>
+  </a>
   &nbsp;&nbsp;
-  <img width="55" title="Git" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"/>
+
+  <a href="https://git-scm.com/">
+    <img width="55" title="Git" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"/>
+  </a>
   &nbsp;&nbsp;
-  <img width="55" title="GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/>
+
+  <a href="https://github.com/">
+    <img width="55" title="GitHub" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/>
+  </a>
   &nbsp;&nbsp;
-  <img width="55" title="IntelliJ IDEA" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg"/>
+
+  <a href="https://www.jetbrains.com/idea/">
+    <img width="55" title="IntelliJ IDEA" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg"/>
+  </a>
 </p>
 
 <p align="center">
   <b>REST Assured</b> •
   <b>JUnit 5</b> •
   <b>Allure Report</b> •
+  <b>Allure TestOps</b> •
   <b>Lombok</b> •
   <b>Jackson</b> •
   <b>FreeMarker</b> •
@@ -88,37 +125,41 @@ The project covers the main user-related API operations: creating, retrieving, u
 
 The project contains automated tests for the main Reqres user API operations.
 
-* `POST /users`
+### POST /users
 
-    * Create a new user
-    * Validate `201 Created`
-    * Deserialize response into DTO
+* Create a new user
+* Validate `201 Created`
+* Deserialize response into DTO
+* Validate created user data
 
-* `GET /users`
+### GET /users
 
-    * Get users list
-    * Validate response status
-    * Deserialize users collection
+* Get users list
+* Validate response status
+* Deserialize users collection
+* Validate returned user data
 
-* `GET /users/2`
+### GET /users/2
 
-    * Get a single user
-    * Validate user information
+* Get a single user
+* Validate `200 OK`
+* Validate user information
 
-* `GET /users/99999`
+### GET /users/99999
 
-    * Request a non-existing user
-    * Validate `404 Not Found`
+* Request a non-existing user
+* Validate `404 Not Found`
 
-* `PUT /users/2`
+### PUT /users/2
 
-    * Update user information
-    * Validate updated response
+* Update user information
+* Validate `200 OK`
+* Validate updated response
 
-* `DELETE /users/2`
+### DELETE /users/2
 
-    * Delete user
-    * Validate `204 No Content`
+* Delete user
+* Validate `204 No Content`
 
 ### Current Test Suite
 
@@ -135,11 +176,15 @@ Failed: 0
 ```text
 reqres-api-tests
 ├── images
-│   ├── reqres.png
+│   ├── reqres-logo.png
 │   ├── allure-overview.png
 │   ├── allure-test-details.png
+│   ├── allure-testops.png
 │   ├── jenkins-allure.png
 │   └── telegram-report.png
+│
+├── notifications
+│   └── telegram.json
 │
 ├── src
 │   └── test
@@ -159,6 +204,7 @@ reqres-api-tests
 │       │               │   └── ReqresSpec.java
 │       │               │
 │       │               └── tests
+│       │                   ├── TestBase.java
 │       │                   └── ReqresApiTests.java
 │       │
 │       └── resources
@@ -168,7 +214,6 @@ reqres-api-tests
 │           │
 │           └── allure.properties
 │
-├── Jenkinsfile
 ├── build.gradle
 ├── gradlew
 ├── gradlew.bat
@@ -210,41 +255,42 @@ Run all tests:
 
 ## Jenkins CI
 
-The project is integrated with Jenkins.
+The project is integrated with Jenkins for automated test execution.
 
-The pipeline is described in:
+<p align="center">
+  <a href="https://jenkins.qa.guru/job/reqres-api-tests/">
+    <b>Open Jenkins Job</b>
+  </a>
+</p>
 
-```text
-Jenkinsfile
-```
-
-### Jenkins Pipeline Flow
+### Jenkins CI Flow
 
 ```text
 GitHub
    ↓
 Jenkins
    ↓
-Checkout
-   ↓
 Gradle
    ↓
 API Tests
    ↓
-Test Statistics
+Allure Results
    ↓
 Allure Report
+   ↓
+Allure TestOps
    ↓
 Telegram Notification
 ```
 
-The pipeline automatically:
+The CI process:
 
 * Downloads the project from GitHub
 * Loads secrets from Jenkins Credentials
 * Executes API tests
-* Collects JUnit XML test statistics
+* Collects test execution results
 * Generates an Allure Report
+* Sends test results to Allure TestOps
 * Generates a test result chart
 * Sends execution results to Telegram
 
@@ -261,7 +307,15 @@ TELEGRAM_CHAT_ID
 ### Jenkins Build
 
 <p align="center">
-  <img src="images/jenkins-allure.png" alt="Jenkins Build" width="90%">
+  <a href="https://jenkins.qa.guru/job/reqres-api-tests/">
+    <img src="images/jenkins-allure.png" alt="Jenkins Build" width="75%">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://jenkins.qa.guru/job/reqres-api-tests/">
+    <b>Open Jenkins Job</b>
+  </a>
 </p>
 
 ---
@@ -292,26 +346,35 @@ The report contains:
 * HTTP response
 * Response status code
 
+<p align="center">
+  <a href="https://jenkins.qa.guru/job/reqres-api-tests/allure/">
+    <b>Open Allure Report</b>
+  </a>
+</p>
+
 ### Allure Overview
 
 <p align="center">
-  <img src="images/allure-overview.png" alt="Allure Overview" width="90%">
+  <a href="https://jenkins.qa.guru/job/reqres-api-tests/allure/">
+    <img src="images/allure-overview.png" alt="Allure Overview" width="75%">
+  </a>
 </p>
 
 ### Test Details
 
 <p align="center">
-  <img src="images/allure-test-details.png" alt="Allure Test Details" width="90%">
+  <a href="https://jenkins.qa.guru/job/reqres-api-tests/allure/">
+    <img src="images/allure-test-details.png" alt="Allure Test Details" width="75%">
+  </a>
 </p>
 
----
 ---
 
 ## Allure TestOps
 
 The project is integrated with Allure TestOps for centralized test result management and test execution analysis.
 
-Test results generated during Jenkins builds are automatically uploaded to the Allure TestOps project.
+Test results generated during Jenkins builds are uploaded to Allure TestOps.
 
 Allure TestOps provides:
 
@@ -327,8 +390,18 @@ Allure TestOps provides:
 ### Allure TestOps Launch
 
 <p align="center">
-  <img src="images/allure-testops.png" alt="Allure TestOps Launch" width="80%">
+  <a href="https://allure.qa.guru/launch/55690">
+    <img src="images/allure-testops.png" alt="Allure TestOps Launch" width="75%">
+  </a>
 </p>
+
+<p align="center">
+  <a href="https://allure.qa.guru/launch/55690">
+    <b>Open Allure TestOps</b>
+  </a>
+</p>
+
+---
 
 ## Telegram Notifications
 
@@ -337,7 +410,7 @@ After Jenkins finishes the build, the execution results are automatically sent t
 The notification contains:
 
 * Environment
-* Jenkins build number
+* Test execution information
 * Total number of scenarios
 * Passed tests
 * Failed tests
@@ -349,7 +422,7 @@ The notification contains:
 ### Telegram Report
 
 <p align="center">
-  <img src="images/telegram-report.png" alt="Telegram Test Report" width="75%">
+  <img src="images/telegram-report.png" alt="Telegram Test Report" width="55%">
 </p>
 
 Example:
