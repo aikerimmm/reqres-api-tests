@@ -11,26 +11,24 @@ import static io.restassured.filter.log.LogDetail.ALL;
 
 public class ReqresSpec {
 
-    private static final String API_KEY = getApiKey();
+    public static RequestSpecification requestSpec() {
+        return new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .addHeader("x-api-key", getApiKey())
+                .log(ALL)
+                .addFilter(
+                        new AllureRestAssured()
+                                .setRequestTemplate("request.ftl")
+                                .setResponseTemplate("response.ftl")
+                )
+                .build();
+    }
 
-    public static RequestSpecification requestSpec =
-            new RequestSpecBuilder()
-                    .setBaseUri("https://reqres.in")
-                    .setBasePath("/api")
-                    .setContentType(ContentType.JSON)
-                    .addHeader("x-api-key", API_KEY)
-                    .log(ALL)
-                    .addFilter(
-                            new AllureRestAssured()
-                                    .setRequestTemplate("request.ftl")
-                                    .setResponseTemplate("response.ftl")
-                    )
-                    .build();
-
-    public static ResponseSpecification responseSpec =
-            new ResponseSpecBuilder()
-                    .log(ALL)
-                    .build();
+    public static ResponseSpecification responseSpec() {
+        return new ResponseSpecBuilder()
+                .log(ALL)
+                .build();
+    }
 
     private static String getApiKey() {
         String apiKey = System.getenv("REQRES_API_KEY");

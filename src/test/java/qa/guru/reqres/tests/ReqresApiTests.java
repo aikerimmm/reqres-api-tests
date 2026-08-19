@@ -26,7 +26,7 @@ import static qa.guru.reqres.specs.ReqresSpec.responseSpec;
 @Epic("Reqres API")
 @Feature("User Management")
 @Owner("Aikerim")
-public class ReqresApiTests {
+public class ReqresApiTests extends TestBase {
 
     @Test
     @DisplayName("Create a new user")
@@ -42,12 +42,12 @@ public class ReqresApiTests {
 
         CreateUserResponseDto response =
                 given()
-                        .spec(requestSpec)
+                        .spec(requestSpec())
                         .body(request)
                         .when()
                         .post("/users")
                         .then()
-                        .spec(responseSpec)
+                        .spec(responseSpec())
                         .statusCode(201)
                         .extract()
                         .as(CreateUserResponseDto.class);
@@ -66,12 +66,12 @@ public class ReqresApiTests {
 
         UserSearchResponseDto response =
                 given()
-                        .spec(requestSpec)
+                        .spec(requestSpec())
                         .queryParam("page", 2)
                         .when()
                         .get("/users")
                         .then()
-                        .spec(responseSpec)
+                        .spec(responseSpec())
                         .statusCode(200)
                         .extract()
                         .as(UserSearchResponseDto.class);
@@ -90,11 +90,11 @@ public class ReqresApiTests {
 
         UserDto response =
                 given()
-                        .spec(requestSpec)
+                        .spec(requestSpec())
                         .when()
                         .get("/users/2")
                         .then()
-                        .spec(responseSpec)
+                        .spec(responseSpec())
                         .statusCode(200)
                         .extract()
                         .jsonPath()
@@ -113,11 +113,11 @@ public class ReqresApiTests {
     void userNotFoundTest() {
 
         given()
-                .spec(requestSpec)
+                .spec(requestSpec())
                 .when()
                 .get("/users/99999")
                 .then()
-                .spec(responseSpec)
+                .spec(responseSpec())
                 .statusCode(404);
     }
 
@@ -135,12 +135,12 @@ public class ReqresApiTests {
 
         UpdateUserResponseDto response =
                 given()
-                        .spec(requestSpec)
+                        .spec(requestSpec())
                         .body(request)
                         .when()
                         .put("/users/2")
                         .then()
-                        .spec(responseSpec)
+                        .spec(responseSpec())
                         .statusCode(200)
                         .extract()
                         .as(UpdateUserResponseDto.class);
@@ -157,11 +157,11 @@ public class ReqresApiTests {
     void deleteUserTest() {
 
         given()
-                .spec(requestSpec)
+                .spec(requestSpec())
                 .when()
                 .delete("/users/2")
                 .then()
-                .spec(responseSpec)
+                .spec(responseSpec())
                 .statusCode(204);
     }
 }
