@@ -4,24 +4,6 @@
   <img src="images/reqres.png" alt="Reqres" width="250">
 </p>
 
-<p align="center">
-  API test automation project for testing the Reqres REST API
-</p>
-
-<p align="center">
-  <a href="https://jenkins.qa.guru/job/reqres-api-tests/">
-    <b>Jenkins</b>
-  </a>
-  •
-  <a href="https://jenkins.qa.guru/job/reqres-api-tests/allure/">
-    <b>Allure Report</b>
-  </a>
-  •
-  <a href="https://allure.qa.guru/launch/55690">
-    <b>Allure TestOps</b>
-  </a>
-</p>
-
 ---
 
 ## Contents
