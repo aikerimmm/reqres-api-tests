@@ -1,7 +1,7 @@
 # API Test Automation Project [Reqres.in](https://reqres.in)
 
 <p align="center">
-  <img src="images/reqres-logo.png" alt="Reqres" width="100%">
+  <img src="images/reqres.png" alt="Reqres" width="250">
 </p>
 
 ---
@@ -305,6 +305,30 @@ The report contains:
 </p>
 
 ---
+---
+
+## Allure TestOps
+
+The project is integrated with Allure TestOps for centralized test result management and test execution analysis.
+
+Test results generated during Jenkins builds are automatically uploaded to the Allure TestOps project.
+
+Allure TestOps provides:
+
+* Centralized test execution history
+* Test launch management
+* Passed, failed and skipped test statistics
+* Test duration and execution details
+* Allure metadata such as Epic, Feature, Story, Severity and Owner
+* HTTP request and response attachments
+* Integration with Jenkins CI
+* Historical test result analysis
+
+### Allure TestOps Launch
+
+<p align="center">
+  <img src="images/allure-testops.png" alt="Allure TestOps Launch" width="80%">
+</p>
 
 ## Telegram Notifications
 
