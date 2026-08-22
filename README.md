@@ -36,24 +36,15 @@ The project covers the main user-related API operations: creating, retrieving, u
 * HTTP requests and response validation using `REST Assured`
 * Test execution with `JUnit 5`
 * Project build and dependency management with `Gradle`
+* Layered API test architecture
+* API Client layer for HTTP requests and response deserialization
+* Allure steps for API actions and assertions
 * Request and response models using `Lombok`
 * JSON serialization and deserialization using `Jackson`
 * Reusable `RequestSpecification` and `ResponseSpecification`
 * Positive and negative API scenarios
 * `Allure REST Assured` listener
 * Custom `FreeMarker` templates for HTTP request and response attachments
-* Allure metadata:
-  * Epic
-  * Feature
-  * Story
-  * Severity
-  * Owner
-* Automated execution through `Jenkins`
-* Secrets stored in `Jenkins Credentials`
-* Automatic Allure Report generation
-* Integration with `Allure TestOps`
-* Automatic Telegram notifications after Jenkins builds
-* Test statistics and result chart sent to Telegram
 
 ---
 
@@ -174,6 +165,9 @@ reqres-api-tests
 │       │   └── qa
 │       │       └── guru
 │       │           └── reqres
+│       │               ├── client
+│       │               │   └── ReqresApiClient.java
+│       │               │
 │       │               ├── models
 │       │               │   ├── CreateUserRequestDto.java
 │       │               │   ├── CreateUserResponseDto.java
