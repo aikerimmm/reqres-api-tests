@@ -14,14 +14,12 @@ import qa.guru.reqres.models.UpdateUserResponseDto;
 import qa.guru.reqres.models.UserDto;
 import qa.guru.reqres.models.UserSearchResponseDto;
 
+import static io.qameta.allure.Allure.step;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.qameta.allure.SeverityLevel.NORMAL;
-import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static qa.guru.reqres.specs.ReqresSpec.requestSpec;
-import static qa.guru.reqres.specs.ReqresSpec.responseSpec;
 
 @Epic("Reqres API")
 @Feature("User Management")
@@ -41,21 +39,14 @@ public class ReqresApiTests extends TestBase {
                 );
 
         CreateUserResponseDto response =
-                given()
-                        .spec(requestSpec())
-                        .body(request)
-                        .when()
-                        .post("/users")
-                        .then()
-                        .spec(responseSpec())
-                        .statusCode(201)
-                        .extract()
-                        .as(CreateUserResponseDto.class);
+                apiClient.createUser(request);
 
-        assertEquals("Aikerim", response.getName());
-        assertEquals("QA Automation Engineer", response.getJob());
-        assertNotNull(response.getId());
-        assertNotNull(response.getCreatedAt());
+        step("Check created user data", () -> {
+            assertEquals("Aikerim", response.getName());
+            assertEquals("QA Automation Engineer", response.getJob());
+            assertNotNull(response.getId());
+            assertNotNull(response.getCreatedAt());
+        });
     }
 
     @Test
@@ -65,21 +56,14 @@ public class ReqresApiTests extends TestBase {
     void getUsersTest() {
 
         UserSearchResponseDto response =
-                given()
-                        .spec(requestSpec())
-                        .queryParam("page", 2)
-                        .when()
-                        .get("/users")
-                        .then()
-                        .spec(responseSpec())
-                        .statusCode(200)
-                        .extract()
-                        .as(UserSearchResponseDto.class);
+                apiClient.getUsers(2);
 
-        assertEquals(2, response.getPage());
-        assertNotNull(response.getData());
-        assertFalse(response.getData().isEmpty());
-        assertNotNull(response.getData().get(0).getEmail());
+        step("Check users list", () -> {
+            assertEquals(2, response.getPage());
+            assertNotNull(response.getData());
+            assertFalse(response.getData().isEmpty());
+            assertNotNull(response.getData().get(0).getEmail());
+        });
     }
 
     @Test
@@ -89,21 +73,14 @@ public class ReqresApiTests extends TestBase {
     void getSingleUserTest() {
 
         UserDto response =
-                given()
-                        .spec(requestSpec())
-                        .when()
-                        .get("/users/2")
-                        .then()
-                        .spec(responseSpec())
-                        .statusCode(200)
-                        .extract()
-                        .jsonPath()
-                        .getObject("data", UserDto.class);
+                apiClient.getUser(2);
 
-        assertEquals(2, response.getId());
-        assertNotNull(response.getEmail());
-        assertNotNull(response.getFirstName());
-        assertNotNull(response.getLastName());
+        step("Check user data", () -> {
+            assertEquals(2, response.getId());
+            assertNotNull(response.getEmail());
+            assertNotNull(response.getFirstName());
+            assertNotNull(response.getLastName());
+        });
     }
 
     @Test
@@ -112,13 +89,12 @@ public class ReqresApiTests extends TestBase {
     @Severity(NORMAL)
     void userNotFoundTest() {
 
-        given()
-                .spec(requestSpec())
-                .when()
-                .get("/users/99999")
-                .then()
-                .spec(responseSpec())
-                .statusCode(404);
+        int statusCode =
+                apiClient.getNonExistingUserStatusCode(99999);
+
+        step("Check that user is not found", () ->
+                assertEquals(404, statusCode)
+        );
     }
 
     @Test
@@ -134,20 +110,13 @@ public class ReqresApiTests extends TestBase {
                 );
 
         UpdateUserResponseDto response =
-                given()
-                        .spec(requestSpec())
-                        .body(request)
-                        .when()
-                        .put("/users/2")
-                        .then()
-                        .spec(responseSpec())
-                        .statusCode(200)
-                        .extract()
-                        .as(UpdateUserResponseDto.class);
+                apiClient.updateUser(2, request);
 
-        assertEquals("Aikerim", response.getName());
-        assertEquals("Senior QA Automation Engineer", response.getJob());
-        assertNotNull(response.getUpdatedAt());
+        step("Check updated user data", () -> {
+            assertEquals("Aikerim", response.getName());
+            assertEquals("Senior QA Automation Engineer", response.getJob());
+            assertNotNull(response.getUpdatedAt());
+        });
     }
 
     @Test
@@ -156,12 +125,11 @@ public class ReqresApiTests extends TestBase {
     @Severity(CRITICAL)
     void deleteUserTest() {
 
-        given()
-                .spec(requestSpec())
-                .when()
-                .delete("/users/2")
-                .then()
-                .spec(responseSpec())
-                .statusCode(204);
+        int statusCode =
+                apiClient.deleteUser(2);
+
+        step("Check that user is deleted", () ->
+                assertEquals(204, statusCode)
+        );
     }
 }
